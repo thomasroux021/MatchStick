@@ -69,6 +69,7 @@ int *print_error_msg(int error, int max_stick, int *table, int line)
         my_putstr("Error: you cannot remove more than ");
         my_put_nbr(max_stick);
         my_putstr(" matches per turn\n");
+        return (player_play(table, max_stick, line));
     } else if (error == 4) {
         my_putstr("Error: not enough matches on this line\n");
         return (player_play(table, max_stick, line));
