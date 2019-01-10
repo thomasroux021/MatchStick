@@ -111,12 +111,27 @@ int *player_play(int *table, int max_stick, int line)
 }
 int *ia_play(int *table, int max_stick, int line)
 {
+    int ia_line;
+    int stick = 0;
+    int mult;
+    int j = 0;
+
+    for (int i = 0; table[i] != -1; i += 1)
+        j += table[i];
+    mult = j - ((j / (max_stick + 1)) * (max_stick + 1) + 1);
+    mult = (mult == -1)?3:mult;
+    for (int i = 0; table[i] != -1; i += 1) {
+        if (table[i] > 0 && (!stick || (table[i] >= mult && stick < mult))) {
+            stick = ((table[i] - mult < 0 && table[i] > 0) || !mult)?1:mult;
+            ia_line = i;
+        }
+    }
     my_putstr("AI removed ");
-    my_put_nbr(1);
+    my_put_nbr(stick);
     my_putstr(" match(es) from line ");
-    my_put_nbr(line);
+    my_put_nbr(ia_line + 1);
     my_putchar('\n');
-    table[line - 1] -= 1;
+    table[ia_line] -= stick;
     return (table);
 }
 
