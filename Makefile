@@ -13,8 +13,9 @@ NAME	=	matchstick
 
 CFLAGS	=	-I./include -I$(LIB_PATH)
 
-SRCS	=	./src/main.c
-
+SRCS	=	./src/main.c \
+		./src/play.c \
+		./src/print.c
 LIB_PATH=	src/lib/my/
 
 OBJS	=	$(SRCS:.c=.o)
