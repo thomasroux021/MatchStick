@@ -33,7 +33,7 @@ int *ia_play(int *table, int max_stick)
     for (int i = 0; table[i] != -1; i += 1)
         j += table[i];
     mult = j - ((j / (max_stick + 1)) * (max_stick + 1) + 1);
-    mult = (mult == -1)?3:mult;
+    mult = (mult == -1)?max_stick:mult;
     for (int i = 0; table[i] != -1; i += 1) {
         if (table[i] > 0 && (!stick || (table[i] >= mult && stick < mult))) {
             stick = ((table[i] - mult < 0 && table[i] > 0) || !mult)?1:mult;
