@@ -26,12 +26,14 @@ int *generate_table(int line)
 int *player_play(int *table, int max_stick, int line)
 {
     int size = 0;
-    char buffer[20];
+    char buffer[1001];
     int line_put;
 
     my_putstr("Line: ");
-    size = read(0, buffer, 20);
-    buffer[size - 1] = '\0';
+    size = read(0, buffer, 1000);
+    if (size == -1)
+        return (NULL);
+    (buffer[size - 1] == '\n')?(buffer[size - 1] = '\0'):(buffer[size] = '\0');
     if (size > 8 || (line_put = my_getnbr(buffer)) > line || !line_put)
         return (print_error_msg(1, max_stick, table, line));
     if (line_put == -1)
@@ -43,11 +45,13 @@ int *player_play(int *table, int max_stick, int line)
 int *player_play_matches(int *table, int max_stick, int line, int line_put)
 {
     int size = 0;
-    char buffer[20];
+    char buffer[1001];
     int stick;
 
-    size = read(0, buffer, 20);
-    buffer[size - 1] = '\0';
+    size = read(0, buffer, 1000);
+    if (size == -1)
+        return (NULL);
+    (buffer[size - 1] == '\n')?(buffer[size - 1] = '\0'):(buffer[size] = '\0');
     if (size > 8 || (stick = my_getnbr(buffer)) > max_stick)
         return (print_error_msg(3, max_stick, table, line));
     if (stick > table[line_put - 1])

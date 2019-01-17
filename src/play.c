@@ -15,6 +15,8 @@ int play(int *table, int max_stick, int line)
             return (1);
         my_putstr("\nYour turn:\n");
         table = player_play(table, max_stick, line);
+        if (table == NULL)
+            return (84);
         print_game(table, line);
         if (detect_lose(table, 1))
             return (2);

@@ -8,6 +8,7 @@
 #ifndef MY_H
 #define MY_H
 
+#include <stdio.h>
 #include "../src/lib/my/lib.h"
 #include <stddef.h>
 #include <stdlib.h>
