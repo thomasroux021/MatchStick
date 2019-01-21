@@ -17,6 +17,10 @@ int play(int *table, int max_stick, int line)
         table = player_play(table, max_stick, line);
         if (table == NULL)
             return (84);
+        if (table[0] == -1) {
+            my_putchar('\n');
+            return (0);
+        }
         print_game(table, line);
         if (detect_lose(table, 1))
             return (2);

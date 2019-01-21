@@ -27,11 +27,15 @@ int *player_play(int *table, int max_stick, int line)
 {
     char *buffer;
     int line_put;
+    int *eof = malloc(sizeof(int) * 1);
 
     my_putstr("Line: ");
     buffer = get_next_line(0);
-    if (buffer == NULL)
+    if (buffer == NULL || eof == NULL)
         return (NULL);
+    eof[0] = -1;
+    if (!my_strcmp(buffer, "ctrld"))
+        return (eof);
     if (my_strlen(buffer) > 8 || (line_put = my_getnbr(buffer)) > line ||
         !line_put)
         return (print_error_msg(1, max_stick, table, line));
@@ -43,12 +47,15 @@ int *player_play(int *table, int max_stick, int line)
 
 int *player_play_matches(int *table, int max_stick, int line, int line_put)
 {
-    char *buffer;
+    char *buffer = get_next_line(0);
     int stick;
+    int *eof = malloc(sizeof(int) * 1);
 
-    buffer = get_next_line(0);
-    if (buffer == NULL)
+    if (buffer == NULL || eof == NULL)
         return (NULL);
+    eof[0] = -1;
+    if (!my_strcmp(buffer, "ctrld"))
+        return (eof);
     if (my_strlen(buffer) > 8 || (stick = my_getnbr(buffer)) > max_stick)
         return (print_error_msg(3, max_stick, table, line));
     if (stick > table[line_put - 1])
