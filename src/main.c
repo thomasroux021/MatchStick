@@ -25,17 +25,15 @@ int *generate_table(int line)
 
 int *player_play(int *table, int max_stick, int line)
 {
-    int size = 0;
-    char buffer[1001];
+    char *buffer;
     int line_put;
 
     my_putstr("Line: ");
-    size = read(0, buffer, 1000);
-    if (size == -1)
+    buffer = get_next_line(0);
+    if (buffer == NULL)
         return (NULL);
-    buffer[size - 1] != '\n'?my_putchar('\n'):0;
-    (buffer[size - 1] == '\n')?(buffer[size - 1] = '\0'):(buffer[size] = '\0');
-    if (size > 8 || (line_put = my_getnbr(buffer)) > line || !line_put)
+    if (my_strlen(buffer) > 8 || (line_put = my_getnbr(buffer)) > line ||
+        !line_put)
         return (print_error_msg(1, max_stick, table, line));
     if (line_put == -1)
         return (print_error_msg(2, max_stick, table, line));
@@ -45,16 +43,13 @@ int *player_play(int *table, int max_stick, int line)
 
 int *player_play_matches(int *table, int max_stick, int line, int line_put)
 {
-    int size = 0;
-    char buffer[1001];
+    char *buffer;
     int stick;
 
-    size = read(0, buffer, 1000);
-    if (size == -1)
+    buffer = get_next_line(0);
+    if (buffer == NULL)
         return (NULL);
-    buffer[size - 1] != '\n'?my_putchar('\n'):0;
-    (buffer[size - 1] == '\n')?(buffer[size - 1] = '\0'):(buffer[size] = '\0');
-    if (size > 8 || (stick = my_getnbr(buffer)) > max_stick)
+    if (my_strlen(buffer) > 8 || (stick = my_getnbr(buffer)) > max_stick)
         return (print_error_msg(3, max_stick, table, line));
     if (stick > table[line_put - 1])
         return (print_error_msg(4, max_stick, table, line));

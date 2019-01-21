@@ -13,7 +13,15 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
+#ifndef READ_SIZE
+#define READ_SIZE 10
+#endif
+
+char *get_next_line(int fd);
 int *player_play_matches(int *table, int max_stick, int line, int line_put);
 int *print_error_msg(int error, int max_stick, int *table, int line);
 void print_player_move(int stick, int line);
