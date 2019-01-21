@@ -75,10 +75,12 @@ char *get_next_line(int fd)
     if (fd == -1 || READ_SIZE <= 0 || count == -1)
         return (NULL);
     (!buf)?(buf = get_buf(fd)):0;
-    dest = malloc(sizeof(char) * (size_line(buf, count) + 1));
+    if (size_line(buf, count) == -1 || buf == NULL)
+        return (NULL);
     if (size_line(buf, count) == -2)
         return ("ctrld");
-    if (dest == NULL || buf == NULL || size_line(buf, count) == -1)
+    dest = malloc(sizeof(char) * (size_line(buf, count) + 1));
+    if (dest == NULL)
         return (NULL);
     for (i = 0; i < size_line(buf, count); i += 1)
         dest[i] = buf[i + count];
