@@ -72,7 +72,7 @@ int main(int ac, char **av)
         return (84);
     line = my_getnbr(av[1]);
     max_stick = my_getnbr(av[2]);
-    if (line == -1 || max_stick == -1 || line >= 100 || !line || !max_stick)
+    if (line == -1 || max_stick == -1 || line > 100 || !line || !max_stick)
         return (84);
     table = generate_table(line);
     if (table == NULL)
