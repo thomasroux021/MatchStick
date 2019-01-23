@@ -7,13 +7,14 @@
 
 #include "my.h"
 
-void print_player_move(int stick, int line)
+int *print_player_move(int stick, int line, int *table)
 {
     my_putstr("Player removed ");
     my_put_nbr(stick);
     my_putstr(" match(es) from line ");
     my_put_nbr(line);
     my_putchar('\n');
+    return (table);
 }
 
 void print_game(int *table, int line)

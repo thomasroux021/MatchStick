@@ -24,7 +24,7 @@
 char *get_next_line(int fd);
 int *player_play_matches(int *table, int max_stick, int line, int line_put);
 int *print_error_msg(int error, int max_stick, int *table, int line);
-void print_player_move(int stick, int line);
+int *print_player_move(int stick, int line, int *table);
 int play(int *table, int max_stick, int line);
 int *ia_play(int *table, int max_stick);
 int *player_play(int *table, int max_stick, int line);

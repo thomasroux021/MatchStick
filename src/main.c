@@ -25,17 +25,19 @@ int *generate_table(int line)
 
 int *player_play(int *table, int max_stick, int line)
 {
-    char *buffer;
+    char *buffer = NULL;
     int line_put;
+    size_t size= 0;
     int *eof = malloc(sizeof(int) * 1);
 
     my_putstr("Line: ");
-    buffer = get_next_line(0);
+    getline(&buffer, &size, stdin);
     if (buffer == NULL || eof == NULL)
         return (NULL);
     eof[0] = -1;
-    if (!my_strcmp(buffer, "ctrld"))
+    if (buffer[0] == 0)
         return (eof);
+    buffer[my_strlen(buffer) - 1] == '\n'?(buffer[my_strlen(buffer) - 1] = '\0'):0;
     if (my_strlen(buffer) > 8 || (line_put = my_getnbr(buffer)) > line ||
         !line_put)
         return (print_error_msg(1, max_stick, table, line));
@@ -45,28 +47,35 @@ int *player_play(int *table, int max_stick, int line)
     return (player_play_matches(table, max_stick, line, line_put));
 }
 
+int *player_play_matches2(int *table, int max_stick, int line, int stick)
+{
+    if (stick == -1)
+        return (print_error_msg(2, max_stick, table, line));
+    return (print_error_msg(5, max_stick, table, line));
+}
+
 int *player_play_matches(int *table, int max_stick, int line, int line_put)
 {
-    char *buffer = get_next_line(0);
     int stick;
+    size_t size = 0;
+    char *buffer = NULL;
     int *eof = malloc(sizeof(int) * 1);
 
+    getline(&buffer, &size, stdin);
     if (buffer == NULL || eof == NULL)
         return (NULL);
     eof[0] = -1;
-    if (!my_strcmp(buffer, "ctrld"))
+    if (buffer[0] == 0)
         return (eof);
+    buffer[my_strlen(buffer) - 1] == '\n'?(buffer[my_strlen(buffer) - 1] = '\0'):0;
     if (my_strlen(buffer) > 8 || (stick = my_getnbr(buffer)) > max_stick)
         return (print_error_msg(3, max_stick, table, line));
     if (stick > table[line_put - 1])
         return (print_error_msg(4, max_stick, table, line));
-    if (stick == -1)
-        return (print_error_msg(2, max_stick, table, line));
-    if (!stick)
-        return (print_error_msg(5, max_stick, table, line));
+    if (stick == -1 || !stick)
+        return (player_play_matches2(table, max_stick, line, stick));
     table[line_put - 1] -= stick;
-    print_player_move(stick, line_put);
-    return (table);
+    return (print_player_move(stick, line_put, table));
 }
 
 int main(int ac, char **av)
