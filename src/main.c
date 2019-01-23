@@ -27,7 +27,7 @@ int *player_play(int *table, int max_stick, int line)
 {
     char *buffer = NULL;
     int line_put;
-    size_t size= 0;
+    size_t size = 0;
     int *eof = malloc(sizeof(int) * 1);
 
     my_putstr("Line: ");
