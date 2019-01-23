@@ -31,13 +31,13 @@ int *player_play(int *table, int max_stick, int line)
     int *eof = malloc(sizeof(int) * 1);
 
     my_putstr("Line: ");
-    getline(&buffer, &size, stdin);
-    if (buffer == NULL || eof == NULL)
+    if (getline(&buffer, &size, stdin) == -1 || buffer == NULL || eof == NULL)
         return (NULL);
     eof[0] = -1;
     if (buffer[0] == 0)
         return (eof);
-    buffer[my_strlen(buffer) - 1] == '\n'?(buffer[my_strlen(buffer) - 1] = '\0'):0;
+    buffer[my_strlen(buffer) - 1] == '\n'?
+        (buffer[my_strlen(buffer) - 1] = '\0'):0;
     if (my_strlen(buffer) > 8 || (line_put = my_getnbr(buffer)) > line ||
         !line_put)
         return (print_error_msg(1, max_stick, table, line));
@@ -61,13 +61,13 @@ int *player_play_matches(int *table, int max_stick, int line, int line_put)
     char *buffer = NULL;
     int *eof = malloc(sizeof(int) * 1);
 
-    getline(&buffer, &size, stdin);
-    if (buffer == NULL || eof == NULL)
+    if (getline(&buffer, &size, stdin) == -1 || buffer == NULL || eof == NULL)
         return (NULL);
     eof[0] = -1;
     if (buffer[0] == 0)
         return (eof);
-    buffer[my_strlen(buffer) - 1] == '\n'?(buffer[my_strlen(buffer) - 1] = '\0'):0;
+    (buffer[my_strlen(buffer) - 1] == '\n')?
+        (buffer[my_strlen(buffer) - 1] = '\0'):0;
     if (my_strlen(buffer) > 8 || (stick = my_getnbr(buffer)) > max_stick)
         return (print_error_msg(3, max_stick, table, line));
     if (stick > table[line_put - 1])

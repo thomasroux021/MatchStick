@@ -78,11 +78,10 @@ char *get_next_line(int fd)
     if (size_line(buf, count) == -2)
         return ("ctrld");
     dest = malloc(sizeof(char) * (size_line(buf, count) + 1));
-    if (dest == NULL) {
-        count = 0;
-        buf = 0;
-        return (NULL);
-    }
+    dest == NULL?(count = 0):0;
+    dest == NULL?(buf = 0):0;
+    if (dest == NULL)
+        return (NULL)
     for (i = 0; i < size_line(buf, count); i += 1)
         dest[i] = buf[i + count];
     dest[i] = '\0';
