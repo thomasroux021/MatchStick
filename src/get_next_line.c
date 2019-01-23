@@ -81,7 +81,7 @@ char *get_next_line(int fd)
     dest == NULL?(count = 0):0;
     dest == NULL?(buf = 0):0;
     if (dest == NULL)
-        return (NULL)
+        return (NULL);
     for (i = 0; i < size_line(buf, count); i += 1)
         dest[i] = buf[i + count];
     dest[i] = '\0';
