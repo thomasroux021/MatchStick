@@ -31,8 +31,7 @@ int *player_play(int *table, int max_stick, int line)
     int *eof = malloc(sizeof(int) * 1);
 
     my_putstr("Line: ");
-    if (getline(&buffer, &size, stdin) || buffer == NULL || eof == NULL)
-        return (NULL);
+    getline(&buffer, &size, stdin);
     eof[0] = -1;
     if (buffer[0] == 0)
         return (eof);
@@ -61,8 +60,7 @@ int *player_play_matches(int *table, int max_stick, int line, int line_put)
     char *buffer = NULL;
     int *eof = malloc(sizeof(int) * 1);
 
-    if (getline(&buffer, &size, stdin) || buffer == NULL || eof == NULL)
-        return (NULL);
+    getline(&buffer, &size, stdin);
     eof[0] = -1;
     if (buffer[0] == 0)
         return (eof);
