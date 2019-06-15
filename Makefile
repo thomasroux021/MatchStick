@@ -15,8 +15,7 @@ CFLAGS	=	-I./include -I$(LIB_PATH)
 
 SRCS	=	./src/main.c \
 		./src/play.c \
-		./src/print.c \
-		./src/get_next_line.c
+		./src/print.c
 
 LIB_PATH=	src/lib/my/
 
